@@ -109,6 +109,12 @@ for i in 0...people.length
     puts people[i].name
 end
 
+# ------- EXAMPLE 05. Delete an specific object from an array. --------
+
+numbers = [2, 65, 3, 24, 19]
+numbers.delete_at(3)
+print numbers
+
 =end
 
 # ----------------------------------------------------------------------- START -------------------------------------------------
@@ -175,6 +181,8 @@ end
 user_option = 0
 owner_option = 0
 current_owners = 0
+delete_user = 0
+delete_option = 0
 
 new_user_name = ""
 new_user_password = ""
@@ -284,6 +292,44 @@ while user_option != 3
 # Step 46-3. Delete a user.
 
                         when owner_option = 3
+                            puts "\n"
+                            puts "You've decided to delete a user."
+                            puts "These are the users in the database: "
+                            puts "\n"
+                            for i in 0...owners.length
+                                puts "USER (#{i}). NAME'S USER: #{owners[i].name}, PASSWORD: #{owners[i].password}"
+                            end
+                            puts "\n"
+                            print "Which one do you want to delete (please enter the user's number): "
+                            delete_user = Integer(gets.chomp)
+                            if delete_user < owners.length
+                                puts "\n"
+                                puts "You've selected this user: NAME'S USER: #{owners[delete_user].name}, PASSWORD: #{owners[delete_user].password}"
+                                puts "Are you sure do you want to delete it?"
+                                puts "\n"
+                                puts "(1) Yes."
+                                puts "(2) No."
+                                puts "\n"
+                                print "R: "
+                                delete_option = Integer(gets.chomp)
+
+                                if delete_option == 1
+                                    puts "\n"
+                                    puts "The user: NAME'S USER: #{owners[delete_user].name}, PASSWORD: #{owners[delete_user].password}, has been deleted."
+                                    owners.delete_at(delete_user)
+                                elsif delete_option == 2
+                                    puts "You've decided to not delete this user."
+                                end
+
+                            else
+                                puts "\n"
+                                puts "You've typed a wrong parameter: #{delete_user}." 
+                                puts "Please, try again."
+                                puts "\n"
+                            end
+
+                            delete_user = 0
+                            delete_option = 0
 
 # Step 46-4. See users in platform.
 
@@ -297,14 +343,11 @@ while user_option != 3
                                 puts "USER: #{owners[i].name}, PASSWORD: #{owners[i].password}"
                             end
 
-
-
 # Step 46-5. Leave.
 
                         when owner_option = 5
                             puts "\n"
                             puts "You've decided to leave."
-
 
 # Step 46-5. Wrong parameter.
                         else
@@ -314,8 +357,9 @@ while user_option != 3
                             owner_option = 0
                     end 
                     puts "\n"
-
                 end
+
+                owner_option = 0
 
 # Step 49. If Owner's parameters are NOK?.
                 
