@@ -3,7 +3,7 @@
 =begin
 
     Description: 
-        In this project you can access a supermarket
+        In this project you can access to a supermarket
         where you will find a lot of products of 
         different areas, such as electronics, food
         and other things. You can access by being a 
@@ -29,9 +29,91 @@
         - +52 (444) 576 3034.
 =end
 
-# ------------------------------------------------ START -------------------------------------------------
+# ------------------------------------------------ HELP -------------------------------------------------
 
-# ---- CLASSES ------
+=begin
+
+# ------- EXAMPLE 01. Adding arrays to a method. ------
+
+def arrayFunction(namesf)
+    for i in 0...namesf.length
+        puts "The name is: #{namesf[i]}"
+    end
+end
+names = ["Jorge", "Maria", "Ana", "Jose", "Maria"]
+arrayFunction(names)
+
+# -- The name is: Jorge
+# -- The name is: Maria
+# -- The name is: Ana
+# -- The name is: Jose
+# -- The name is: Maria
+
+# ------- EXAMPLE 02. Print 2D arrays. --------
+
+name = "Jorge"
+age = 25
+name_2 = "Zaira"
+age_2 = 20
+info_1 = [name, age]
+info_2 = [name_2, age_2]
+people = [info_1, info_2]
+
+print people
+# -- [["Jorge", 25], ["Zaira", 20]]
+puts "\n"
+
+puts people[0][1]
+puts people[1][0]
+# -- 25
+# -- Zaira
+
+# ------- EXAMPLE 03. Returning more than one value. --------
+
+numbers = [20, 8]
+def operations(numbers)
+    add_res = numbers[0] + numbers[1]
+    sub_res = numbers[0] - numbers[1]
+    return add_res, sub_res
+end
+
+result_add, result_sub = operations(numbers)
+puts "Add is #{result_add}"
+puts "Add is #{result_sub}"
+
+# ------- EXAMPLE 04. Adding objects to an array. --------
+
+class Owners
+    attr_accessor :name, :password
+    def initialize(name_owner, password_owner)
+        @name = name_owner
+        @password = password_owner
+    end
+end
+
+people = Array.new
+
+name = "Jorge"
+pass = "1010"
+person = Owners.new(name, pass)
+puts "Person 1 is: #{person}"
+people.push(person)
+
+name = "Ana"
+pass = "1090"
+person = Owners.new(name, pass)
+puts "Person 2 is: #{person}"
+people.push(person)
+
+for i in 0...people.length
+    puts people[i].name
+end
+
+=end
+
+# ----------------------------------------------------------------------- START -------------------------------------------------
+
+# --------------------------- CLASSES ------
 
 class Computers
     attr_accessor :type, :price, :quantity
@@ -68,37 +150,47 @@ class Owners
     end
 end
 
-# ---- VARIABLES ------
+# ---------------------------- METHODS ------
+
+def loginUser(user_name, user_password, owners)
+    
+    response = false
+    
+    for i in 0...owners.length
+        
+        if user_name == owners[i].name && user_password == owners[i].password
+            puts "\n"
+            puts "Welcome: #{owners[i].name}"
+            response = true
+        elsif i == (owners.length - 1) && response == false
+            puts "Sorry, user's name or password invalid. Try again later. "
+            response = false
+        end
+    end
+    return response
+end
+
+# ---------------------------- VARIABLES ------
 
 user_option = 0
+owner_option = 0
+current_owners = 0
+
+new_user_name = ""
+new_user_password = ""
+new_user_phrase = ""
 
 owner_name = "Jorge"
 owner_password = "1011"
-owner_help = "user: Jorge, password: 11 B"
 
-# ---- ARRAYS ------
+create_user = Owners.new(owner_name, owner_password)
 
-owner_info = Array.new
-owner_info = [owner_name, owner_password, owner_help]
+# ----------------------------- ARRAYS ------
 
 owners = Array.new
-owners = [owner_info]
+owners.push(create_user)
 
-# ---- METHODS ------
-
-def findUser(user_name, user_password, owners[])
-
-    if(user_name == owner_name) && (user_password == owner_password)
-        puts "Welcome: #{user_name}."
-
-    else
-        puts "Password or user's name wrong. Please, try again."
-        puts "\n"
-    end
-
-end
-
-# ---- STEPS ------
+# ------------------------------------------------------------ STEPS -----------------------------------------------
 
 # Step 00. Welcome Message.
 
@@ -134,8 +226,9 @@ while user_option != 3
             puts "You've chosen Owner's Option."
             puts "\n"
 
+# Step 41. Get Owner's parameters.
+
             puts "Please, introduce the user's name and the password."
-            puts "Help: #{owner_help}"
             puts "\n"
 
             print "User's name: "
@@ -143,6 +236,92 @@ while user_option != 3
             puts "\n"
             print "Password: "
             user_password = (gets.chomp).to_s
+
+# Step 42. Sned Owner's parameters.
+
+            response = loginUser(user_name, user_password, owners)
+
+# Step 43. If Owner's parameters are OK?.
+
+            if response
+                puts "\n"
+
+# Step 44. Owner's actions.
+                
+                while owner_option != 5
+
+                    puts "What do you want to do sir? "
+                    puts "\n"
+                    puts "(1) Add objects to the store."
+                    puts "(2) Add another user."
+                    puts "(3) Delete a user."
+                    puts "(4) See currents users."
+                    puts "(5) Leave."
+                    print "R: "
+                    owner_option = Integer(gets.chomp)
+
+# Step 45. Case owner's option.
+                    
+                    case owner_option
+
+# Step 46-1. Add Objects to the store.
+
+                        when owner_option = 1
+
+# Step 46-2. Add another user.
+
+                        when owner_option = 2
+                            puts "\n"
+                            puts "You've decided to add a new user."
+                            print "Please, introduce the new user's name: "
+                            new_user_name = (gets.chomp).to_s
+                            print "Now, introduce the new user's password: "
+                            new_user_password = (gets.chomp).to_s
+
+                            create_user = Owners.new(new_user_name, new_user_password)
+                            owners.push(create_user)
+
+# Step 46-3. Delete a user.
+
+                        when owner_option = 3
+
+# Step 46-4. See users in platform.
+
+                        when owner_option = 4
+                            puts "\n"
+                            puts "You've decided to see all the users."
+                            puts "These are the users in the database: "
+                            puts "\n"
+
+                            for i in 0...owners.length
+                                puts "USER: #{owners[i].name}, PASSWORD: #{owners[i].password}"
+                            end
+
+
+
+# Step 46-5. Leave.
+
+                        when owner_option = 5
+                            puts "\n"
+                            puts "You've decided to leave."
+
+
+# Step 46-5. Wrong parameter.
+                        else
+                            puts "\n"
+                            puts "You've introduce a different value."
+                            puts "Please, try again."
+                            owner_option = 0
+                    end 
+                    puts "\n"
+
+                end
+
+# Step 49. If Owner's parameters are NOK?.
+                
+            elsif response == false
+                puts "\n"
+            end
 
 # Step 50. Leave option.
 
