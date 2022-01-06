@@ -176,26 +176,86 @@ def loginUser(user_name, user_password, owners)
     return response
 end
 
+def seeComputersAvailable(computers_stock)
+    puts "\n"
+    puts "These are the available products for: COMPUTERS."
+    puts "\n"
+
+    for i in 0...computers_stock.length
+        puts "#{i}. COMPUTER: #{computers_stock[i].type}, PRICE: #{computers_stock[i].price}, QUANTITY: #{computers_stock[i].quantity}"
+    end
+    puts "\n"
+end
+
+def seeCigarretesAvailable(cigarretes_stock)
+    puts "\n"
+    puts "These are the available products for: CIGARRETES."
+    puts "\n"
+
+    for i in 0...cigarretes_stock.length
+        puts "#{i}. CIGARRETES: #{cigarretes_stock[i].type}, PRICE: #{cigarretes_stock[i].price}, QUANTITY: #{cigarretes_stock[i].quantity}"
+    end
+    puts "\n"
+end
+
+def seeFruitsAvailable(fruits_stock)
+    puts "\n"
+    puts "These are the available products for: FRUITS."
+    puts "\n"
+
+    for i in 0...fruits_stock.length
+        puts "#{i}. FRUIT: #{fruits_stock[i].type}, PRICE: #{fruits_stock[i].price}, QUANTITY: #{fruits_stock[i].quantity}"
+    end
+    puts "\n"
+end
+
 # ---------------------------- VARIABLES ------
+
+type_computer = "HP"
+price_computer = "499.99"
+quantity_computer = 3
+
+type_cigarrete = "Marlboro"
+price_cigarrete = "9.99"
+quantity_cigarrete = 2
+
+type_fruit = "Apple"
+price_fruit = "2.99"
+quantity_fruit = 5
 
 user_option = 0
 owner_option = 0
 current_owners = 0
 delete_user = 0
 delete_option = 0
+buyer_option = 0
+option_available = 0
 
 new_user_name = ""
 new_user_password = ""
 new_user_phrase = ""
+product_option = ""
 
 owner_name = "Jorge"
 owner_password = "1011"
 
+# ----------------------------- OBJECTS ------
+
+create_computer = Computers.new(type_computer, price_computer, quantity_computer)
+create_cigarretes = Cigarretes.new(type_cigarrete, price_cigarrete, quantity_cigarrete)
+create_fruit = Fruits.new(type_fruit, price_fruit, quantity_fruit)
 create_user = Owners.new(owner_name, owner_password)
 
 # ----------------------------- ARRAYS ------
 
+computers_stock = Array.new
+cigarretes_stock = Array.new
+fruits_stock = Array.new
 owners = Array.new
+
+computers_stock.push(create_computer)
+cigarretes_stock.push(create_cigarretes)
+fruits_stock.push(create_fruit)
 owners.push(create_user)
 
 # ------------------------------------------------------------ STEPS -----------------------------------------------
@@ -227,6 +287,101 @@ while user_option != 3
 
         when user_option = 1
             puts "You've chosen Buyer's Option."
+
+# Step 31. Buyer's choice.
+
+            while buyer_option != 3
+
+            puts "\n"
+            puts "Hello dear user. What do you want to do: "
+            puts "\n"
+            puts "(1). See available products."
+            puts "(2). Buy a product."
+            puts "(3). Leave"
+            puts "\n"
+            buyer_option = Integer(gets.chomp)
+
+                case buyer_option
+
+                    when buyer_option = 1
+
+                        puts "\n"
+                        puts "You've decided to see available products."
+
+                        while option_available != 4
+
+                            puts "\n"
+                            puts "What kind of products do you want to see: "
+                            puts "\n"
+                            puts "(1) Computers."
+                            puts "(2) Cigarretes."
+                            puts "(3) Fruits."
+                            puts "(4) Leave."
+                            puts "\n"
+                            print "R: "
+                            option_available = Integer(gets.chomp)
+
+                            case option_available
+
+                                when option_available = 1
+                                    puts "\n"
+                                    seeComputersAvailable(computers_stock)
+                                    option_available = 0
+
+                                when option_available = 2
+                                    puts "\n"
+                                    seeCigarretesAvailable(cigarretes_stock)
+                                    option_available = 0
+
+                                when option_available = 3
+                                    puts "\n"
+                                    seeFruitsAvailable(fruits_stock)
+                                    option_available = 0
+
+                                when option_available = 4
+                                    puts "\n"
+                                    puts "You've decided to leave."
+                                    option_available = 0
+
+                                else
+                                    puts "\n"
+                                    puts "You've introduce awrong parameter. Please, try again."
+                                    puts "\n"                                                       
+                            end
+
+                        buyer_option = 0
+
+                    when buyer_option = 2
+                        puts "\n"
+                        puts "You've decided to buy products."
+
+
+
+
+
+
+
+
+
+
+
+
+                        buyer_option = 0
+                        
+                    when buyer_option = 3
+                        puts "\n"
+                        puts "You've decided to leave."
+                        puts "Have a wonderful day!!!"
+                        puts "\n"
+
+                    else
+                        puts "\n"
+                        puts "You've introduced a wrong parameter."
+                        buyer_option = 0
+                        puts "\n"
+
+                end
+            end
 
 # Step 40. Owners' option.
 
@@ -275,6 +430,104 @@ while user_option != 3
 # Step 46-1. Add Objects to the store.
 
                         when owner_option = 1
+                            puts "\n"
+                            puts "You've decided to add a objects to the store."
+                            puts "The current objects that we have in store are: "
+                            puts "\n"
+                            puts "(1) Computers."
+                            puts "(2) Cigarretes."
+                            puts "(3) Fruits."
+                            puts "(4) Leave."
+                            puts "\n"
+                            print "Which product do you want to add into the store? "
+                            product_option = Integer(gets.chomp)
+
+                            while product_option != 4
+
+                                case product_option
+
+                                    when product_option = 1
+                                        puts "\n"
+                                        puts "You've chosen Computers."                                    
+                                        puts "\n"
+                                        print "Please, introduce the computer's type (HP, MAC, LENOVO, ASUS): "
+                                        type_computer = (gets.chomp).to_s
+                                        print "Now, introduce the computer's price: "
+                                        price_computer = (gets.chomp).to_s
+                                        print "Finally, introduce the amount of computers you will store: "
+                                        quantity_computer = Integer(gets.chomp)
+                                        create_computer = Computers.new(type_computer, price_computer, quantity_computer)
+                                        computers_stock.push(create_computer)
+                                        puts "\n"
+                                        puts "Now, These are all the computers that we have in stock: "   
+                                        puts "\n"
+
+                                        for i in 0...computers_stock.length
+                                            puts "COMPUTER: #{computers_stock[i].type}, PRICE: #{computers_stock[i].price}, QUANTITY: #{computers_stock[i].quantity}"
+                                        end
+
+                                        type_computer = ""
+                                        price_computer = ""
+                                        quantity_computer = 0
+                                        product_option = 0
+
+                                    when product_option = 2
+                                        puts "\n"
+                                        puts "You've chosen Cigarretes."
+                                        puts "\n"
+                                        print "Please, introduce the Cigarrete's type (Marlboro, Pall Mall, Winston): "
+                                        type_cigarrete = (gets.chomp).to_s
+                                        print "Now, introduce the computer's price: "
+                                        price_cigarrete = (gets.chomp).to_s
+                                        print "Finally, introduce the amount of computers you will store: "
+                                        quantity_cigarrete = Integer(gets.chomp)
+                                        create_cigarretes = Computers.new(type_cigarrete, price_cigarrete, quantity_cigarrete)
+                                        cigarretes_stock.push(create_cigarretes)
+                                        puts "\n"
+                                        puts "Now, These are all the computers that we have in stock: "   
+                                        puts "\n"
+
+                                        for i in 0...cigarretes_stock.length
+                                            puts "COMPUTER: #{cigarretes_stock[i].type}, PRICE: #{cigarretes_stock[i].price}, QUANTITY: #{cigarretes_stock[i].quantity}"
+                                        end
+
+                                        type_cigarrete = ""
+                                        price_cigarrete = ""
+                                        quantity_cigarrete = 0  
+                                        product_option = 0
+
+                                    when product_option = 3
+                                        puts "\n"
+                                        puts "You've chosen Fruits."
+                                        puts "\n"
+                                        print "Please, introduce the Fruit's type (Apple, Orange, Peach): "
+                                        type_fruit = (gets.chomp).to_s
+                                        print "Now, introduce the computer's price: "
+                                        price_fruit = (gets.chomp).to_s
+                                        print "Finally, introduce the amount of computers you will store: "
+                                        quantity_fruit = Integer(gets.chomp)
+                                        create_fruit = Computers.new(type_fruit, price_fruit, quantity_fruit)
+                                        fruits_stock.push(create_fruit)
+                                        puts "\n"
+                                        puts "Now, These are all the computers that we have in stock: "   
+                                        puts "\n"
+
+                                        for i in 0...fruits_stock.length
+                                            puts "COMPUTER: #{fruits_stock[i].type}, PRICE: #{fruits_stock[i].price}, QUANTITY: #{fruits_stock[i].quantity}"
+                                        end
+
+                                        type_fruit = ""
+                                        price_fruit = ""
+                                        quantity_fruit = 0
+                                        product_option = 0
+
+                                    when product_option = 4
+                                        puts "\n"
+                                        puts "You've decided to leave."
+                                        puts "\n"
+                                end
+                            end
+                            product_option = 0
 
 # Step 46-2. Add another user.
 
