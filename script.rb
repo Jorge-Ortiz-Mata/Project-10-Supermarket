@@ -144,8 +144,6 @@ while user_option != 3
             print "Password: "
             user_password = (gets.chomp).to_s
 
-
-
 # Step 50. Leave option.
 
         when user_option = 3
