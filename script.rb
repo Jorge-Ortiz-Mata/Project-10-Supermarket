@@ -230,6 +230,7 @@ delete_user = 0
 delete_option = 0
 buyer_option = 0
 option_available = 0
+buy_product_option = 0
 
 new_user_name = ""
 new_user_password = ""
@@ -268,7 +269,6 @@ puts "Hello! This is the George's supermarket where you can find anything here."
 # Step 10. User's choice.
 
 while user_option != 3
-
     puts "Before to get started, please, tell me, Are you a buyer or a supermarket's owner? " 
     puts "\n"
     puts "(1) Buyer." 
@@ -291,7 +291,6 @@ while user_option != 3
 # Step 31. Buyer's choice.
 
             while buyer_option != 3
-
             puts "\n"
             puts "Hello dear user. What do you want to do: "
             puts "\n"
@@ -304,12 +303,10 @@ while user_option != 3
                 case buyer_option
 
                     when buyer_option = 1
-
                         puts "\n"
                         puts "You've decided to see available products."
 
                         while option_available != 4
-
                             puts "\n"
                             puts "What kind of products do you want to see: "
                             puts "\n"
@@ -341,20 +338,53 @@ while user_option != 3
                                 when option_available = 4
                                     puts "\n"
                                     puts "You've decided to leave."
-                                    option_available = 0
 
                                 else
                                     puts "\n"
                                     puts "You've introduce awrong parameter. Please, try again."
-                                    puts "\n"                                                       
+                                    puts "\n"
+                                    option_available = 0
                             end
-
+                        end
+                        
                         buyer_option = 0
 
                     when buyer_option = 2
                         puts "\n"
                         puts "You've decided to buy products."
 
+                        while buy_product_option != 4
+                            puts "\n"
+                            puts "What kind of product do you wish to buy?"
+                            puts "\n"
+                            puts "(1). Buy computers."
+                            puts "(2). Buy cigarretes."
+                            puts "(3). Buy fruits."
+                            puts "(4). Leave."
+                            puts "\n"
+                            print "R: "
+                            buy_product_option = Integer(gets.chomp)
+
+                            case buy_product_option
+
+                                when buy_product_option = 1
+                                    puts "\n"
+                                    puts "You've decided to buy a computer. "
+                                    puts "\n"
+                                    seeComputersAvailable(computers_stock)
+                                    puts "\n"
+
+                                    puts "Before to make the purchase, please introduce some information."
+                                    print "Introduce your full name: "
+                                    buyer_name = (gets.chomp).to_s
+                                    print "Now, please, introduce your address: "
+                                    buyer_address = (gets.chomp).to_s
+                                    print "Introduce your bank account: "
+                                    buyer_bank_account = (gets.chomp).to_s
+                                    print "Finally, introduce the amount of money that you have: "
+                                    buyer_money = (gets.chomp).to_f 
+                                    
+                                    
 
 
 
@@ -364,8 +394,68 @@ while user_option != 3
 
 
 
+                                    buy_product_option = 0
+
+                                when buy_product_option = 2
+                                    puts "\n"
+                                    puts "You've decided to buy a computer. "
+                                    puts "\n"
+                                    seeCigarretesAvailable(cigarretes_stock)
+
+                                    puts "\n"
+                                    puts "Before to make the purchase, please introduce some information."
+                                    print "Introduce your full name: "
+                                    buyer_name = (gets.chomp).to_s
+                                    print "Now, please, introduce your address: "
+                                    buyer_address = (gets.chomp).to_s
+                                    print "Introduce your bank account: "
+                                    buyer_bank_account = (gets.chomp).to_s
+                                    print "Finally, introduce the amount of money that you have: "
+                                    buyer_money = (gets.chomp).to_f 
 
 
+
+
+
+
+                                    buy_product_option = 0
+
+                                when buy_product_option = 3
+                                    puts "\n"
+                                    puts "You've decided to buy a computer. "
+                                    puts "\n"
+                                    seeFruitsAvailable(fruits_stock)
+
+                                    puts "\n"
+                                    puts "Before to make the purchase, please introduce some information."
+                                    print "Introduce your full name: "
+                                    buyer_name = (gets.chomp).to_s
+                                    print "Now, please, introduce your address: "
+                                    buyer_address = (gets.chomp).to_s
+                                    print "Introduce your bank account: "
+                                    buyer_bank_account = (gets.chomp).to_s
+                                    print "Finally, introduce the amount of money that you have: "
+                                    buyer_money = (gets.chomp).to_f 
+
+
+
+
+                                    buy_product_option = 0
+
+                                when buy_product_option = 4
+                                    puts "\n"
+                                    puts "You've decided to leave. "
+                                    puts "\n"
+
+                                else
+                                    puts "\n"
+                                    puts "You've introduced a wrong parameter."
+                                    buy_product_option = 0
+                                    puts "\n"
+                            end
+                        end
+
+                        buy_product_option = 0
                         buyer_option = 0
                         
                     when buyer_option = 3
@@ -412,7 +502,6 @@ while user_option != 3
 # Step 44. Owner's actions.
                 
                 while owner_option != 5
-
                     puts "What do you want to do sir? "
                     puts "\n"
                     puts "(1) Add objects to the store."
@@ -525,6 +614,12 @@ while user_option != 3
                                         puts "\n"
                                         puts "You've decided to leave."
                                         puts "\n"
+
+                                    else
+                                        puts "\n"
+                                        puts "You've chose a different optioon from the menu. Please, try again."
+                                        product_option = 0
+                                        puts "\n"
                                 end
                             end
                             product_option = 0
@@ -555,6 +650,7 @@ while user_option != 3
                             puts "\n"
                             print "Which one do you want to delete (please enter the user's number): "
                             delete_user = Integer(gets.chomp)
+
                             if delete_user < owners.length
                                 puts "\n"
                                 puts "You've selected this user: NAME'S USER: #{owners[delete_user].name}, PASSWORD: #{owners[delete_user].password}"
