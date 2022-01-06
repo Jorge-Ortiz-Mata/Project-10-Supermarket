@@ -246,6 +246,8 @@ delete_option = 0
 buyer_option = 0
 option_available = 0
 buy_product_option = 0
+buyer_choose_product = 0
+buyer_purchase = 0
 
 new_user_name = ""
 new_user_password = ""
@@ -409,6 +411,46 @@ while user_option != 3
                                     seeComputersAvailable(computers_stock)
                                     puts "\n"
                                     print "Which computer do you want to buy? "
+                                    buyer_choose_product = Integer(gets.chomp)
+
+                                    computers_stock[buyer_choose_product].price = (computers_stock[buyer_choose_product].price).to_f
+
+                                    if buyer_money >= computers_stock[buyer_choose_product].price
+                                        puts "\n"
+                                        puts "You have enough money. Do you want to buy it?"
+                                        puts "\n"
+                                        puts "COMPUTER: #{computers_stock[buyer_choose_product].type}, PRICE: #{computers_stock[buyer_choose_product].price}, QUANTITY: #{computers_stock[buyer_choose_product].quantity}"
+                                        puts "\n"
+                                        puts "(1). Yes."
+                                        puts "(2). No."
+                                        puts "\n"
+                                        print "R: "
+                                        buyer_purchase = Integer(gets.chomps)
+
+                                        if buyer_purchase == 1
+                                            puts "\n"
+                                            puts "Thanks for the purchase!"
+                                            puts "Now, one of our assistants will contact you to review some details. "
+                                            puts "\n"
+                                            puts "PURCHASE: COMPUTER: #{computers_stock[buyer_choose_product].type}, PRICE: #{computers_stock[buyer_choose_product].price}, QUANTITY: #{computers_stock[buyer_choose_product].quantity}"
+                                            buyer_money = buyer_money - computers_stock[buyer_choose_product].price
+                                            computers_stock.delete_at(buyer_choose_product)
+                                            puts "\n"                                            
+
+                                        elsif buyer_purchase == 2
+                                            puts "\n"
+                                            puts "Well, it's ok. You can look for other products."
+
+                                        else
+                                            puts "\n"
+                                            puts "You typed a different option. Please try again later."                                            
+                                        end
+
+                                    else
+                                        puts "\n"
+                                        puts "It seems that you don't have enough money"
+
+                                    end
                                     
                                     
                                     
@@ -571,6 +613,7 @@ while user_option != 3
                             puts "(3) Fruits."
                             puts "(4) Leave."
                             puts "\n"
+                            product_option = 0
                             print "Which product do you want to add into the store? "
                             product_option = Integer(gets.chomp)
 
@@ -601,7 +644,7 @@ while user_option != 3
                                         type_computer = ""
                                         price_computer = ""
                                         quantity_computer = 0
-                                        product_option = 0
+                                        product_option = 4
 
                                     when product_option = 2
                                         puts "\n"
@@ -626,7 +669,7 @@ while user_option != 3
                                         type_cigarrete = ""
                                         price_cigarrete = ""
                                         quantity_cigarrete = 0  
-                                        product_option = 0
+                                        product_option = 4
 
                                     when product_option = 3
                                         puts "\n"
@@ -651,7 +694,7 @@ while user_option != 3
                                         type_fruit = ""
                                         price_fruit = ""
                                         quantity_fruit = 0
-                                        product_option = 0
+                                        product_option = 4
 
                                     when product_option = 4
                                         puts "\n"
