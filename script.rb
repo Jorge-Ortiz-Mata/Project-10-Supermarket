@@ -156,6 +156,16 @@ class Owners
     end
 end
 
+class Buyers
+    attr_accessor :name, :address, :bank_account, :buyer_money
+    def initialize(buyer_name, buyer_address, buyer_bank_account, buyer_money)
+        @name = buyer_name
+        @address = buyer_address
+        @bank_account = buyer_bank_account
+        @buyer_money = buyer_money
+    end
+end
+
 # ---------------------------- METHODS ------
 
 def loginUser(user_name, user_password, owners)
@@ -211,6 +221,11 @@ end
 
 # ---------------------------- VARIABLES ------
 
+buyer_name = ""
+buyer_address = ""
+buyer_bank_account = ""
+buyer_money = 0
+
 type_computer = "HP"
 price_computer = "499.99"
 quantity_computer = 3
@@ -253,6 +268,7 @@ computers_stock = Array.new
 cigarretes_stock = Array.new
 fruits_stock = Array.new
 owners = Array.new
+buyers_stock = Array.new
 
 computers_stock.push(create_computer)
 cigarretes_stock.push(create_cigarretes)
@@ -370,11 +386,11 @@ while user_option != 3
                                 when buy_product_option = 1
                                     puts "\n"
                                     puts "You've decided to buy a computer. "
-                                    puts "\n"
-                                    seeComputersAvailable(computers_stock)
-                                    puts "\n"
 
+                                    #------------------
+                                    puts "\n"
                                     puts "Before to make the purchase, please introduce some information."
+                                    puts "\n"
                                     print "Introduce your full name: "
                                     buyer_name = (gets.chomp).to_s
                                     print "Now, please, introduce your address: "
@@ -383,13 +399,19 @@ while user_option != 3
                                     buyer_bank_account = (gets.chomp).to_s
                                     print "Finally, introduce the amount of money that you have: "
                                     buyer_money = (gets.chomp).to_f 
+                                    create_buyer = Buyers.new(buyer_name, buyer_address, buyer_bank_account, buyer_money)
+                                    buyers_stock.push(create_buyer)
+                                    puts "Thank you!"
+                                    puts "\n"
+                                    #------------------
+
+                                    puts "\n"
+                                    seeComputersAvailable(computers_stock)
+                                    puts "\n"
+                                    print "Which computer do you want to buy? "
                                     
                                     
-
-
-
-
-
+                                    
 
 
 
@@ -398,12 +420,12 @@ while user_option != 3
 
                                 when buy_product_option = 2
                                     puts "\n"
-                                    puts "You've decided to buy a computer. "
-                                    puts "\n"
-                                    seeCigarretesAvailable(cigarretes_stock)
+                                    puts "You've decided to buy cigarretes. "
 
+                                    #------------------
                                     puts "\n"
                                     puts "Before to make the purchase, please introduce some information."
+                                    puts "\n"
                                     print "Introduce your full name: "
                                     buyer_name = (gets.chomp).to_s
                                     print "Now, please, introduce your address: "
@@ -412,6 +434,17 @@ while user_option != 3
                                     buyer_bank_account = (gets.chomp).to_s
                                     print "Finally, introduce the amount of money that you have: "
                                     buyer_money = (gets.chomp).to_f 
+                                    create_buyer = Buyers.new(buyer_name, buyer_address, buyer_bank_account, buyer_money)
+                                    buyers_stock.push(create_buyer)
+                                    puts "Thank you!"
+                                    puts "\n"
+                                    #------------------
+
+                                    puts "\n"
+                                    seeCigarretesAvailable(cigarretes_stock)
+
+
+
 
 
 
@@ -422,12 +455,12 @@ while user_option != 3
 
                                 when buy_product_option = 3
                                     puts "\n"
-                                    puts "You've decided to buy a computer. "
-                                    puts "\n"
-                                    seeFruitsAvailable(fruits_stock)
+                                    puts "You've decided to buy fruit. "
 
+                                    #------------------
                                     puts "\n"
                                     puts "Before to make the purchase, please introduce some information."
+                                    puts "\n"
                                     print "Introduce your full name: "
                                     buyer_name = (gets.chomp).to_s
                                     print "Now, please, introduce your address: "
@@ -436,6 +469,16 @@ while user_option != 3
                                     buyer_bank_account = (gets.chomp).to_s
                                     print "Finally, introduce the amount of money that you have: "
                                     buyer_money = (gets.chomp).to_f 
+                                    create_buyer = Buyers.new(buyer_name, buyer_address, buyer_bank_account, buyer_money)
+                                    buyers_stock.push(create_buyer)
+                                    puts "Thank you!"
+                                    puts "\n"
+                                    #------------------
+
+                                    puts "\n"
+                                    seeFruitsAvailable(fruits_stock)
+
+
 
 
 
