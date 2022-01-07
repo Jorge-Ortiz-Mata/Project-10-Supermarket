@@ -157,7 +157,7 @@ class Owners
 end
 
 class Buyers
-    attr_accessor :name, :address, :bank_account, :buyer_money
+    attr_accessor :name, :address, :bank_account, :money
     def initialize(buyer_name, buyer_address, buyer_bank_account, buyer_money)
         @name = buyer_name
         @address = buyer_address
@@ -221,15 +221,20 @@ end
 
 def seeBuyersInfo(buyers_stock)
 
+    puts "\n"
+    if buyers_stock.length > 0
 
+        puts "These are the buyer's information in the databse." 
 
+        for i in 0...buyers_stock.length
+            puts "USER #{i} = NAME: #{buyers_stock[i].name}, ADDRESS: #{buyers_stock[i].address}, BANK ACCOUNT: #{buyers_stock[i].bank_account}, MONEY: #{buyers_stock[i].money}"
+        end
 
-
-
-
-    
+        elsif buyers_stock.length == 0
+            puts "\n"
+            puts "Sorry, but there isn't any buyer's information in the database."
+    end
 end
-
 
 # ---------------------------- VARIABLES ------
 
@@ -298,8 +303,8 @@ puts "Hello! This is the George's supermarket where you can find anything here."
 
 # Step 10. User's choice.
 
+user_option = 0
 while user_option != 3
-    user_option = 0
     puts "Before to get started, please, tell me, Are you a buyer or a supermarket's owner? " 
     puts "\n"
     puts "(1) Buyer." 
@@ -319,19 +324,19 @@ while user_option != 3
 
         when user_option = 1
             puts "You've chosen Buyer's Option."
+            buyer_option = 0
 
 # Step 31. Buyer's choice.
 
-            buyer_option = 0
             while buyer_option != 3
-            puts "\n"
-            puts "Hello dear user. What do you want to do: "
-            puts "\n"
-            puts "(1). See available products."
-            puts "(2). Buy a product."
-            puts "(3). Leave"
-            puts "\n"
-            buyer_option = Integer(gets.chomp)
+                puts "\n"
+                puts "Hello dear user. What do you want to do: "
+                puts "\n"
+                puts "(1). See available products."
+                puts "(2). Buy a product."
+                puts "(3). Leave"
+                puts "\n"
+                buyer_option = Integer(gets.chomp)
 
                 case buyer_option
 
@@ -339,7 +344,7 @@ while user_option != 3
                         puts "\n"
                         puts "You've decided to see available products."
                         option_available = 0
-
+                        
                         while option_available != 4
                             puts "\n"
                             puts "What kind of products do you want to see: "
@@ -357,14 +362,17 @@ while user_option != 3
                                 when option_available = 1
                                     puts "\n"
                                     seeComputersAvailable(computers_stock)
+                                    option_available = 0
 
                                 when option_available = 2
                                     puts "\n"
                                     seeCigarretesAvailable(cigarretes_stock)
+                                    option_available = 0
 
                                 when option_available = 3
                                     puts "\n"
                                     seeFruitsAvailable(fruits_stock)
+                                    option_available = 0
 
                                 when option_available = 4
                                     puts "\n"
@@ -376,12 +384,13 @@ while user_option != 3
                                     puts "\n"
                             end
                         end
+                        buyer_option = 0
     
                     when buyer_option = 2
                         puts "\n"
                         puts "You've decided to buy products."
                         buy_product_option = 0
-
+                        
                         while buy_product_option != 4
                             puts "\n"
                             puts "What kind of product do you wish to buy?"
@@ -461,7 +470,9 @@ while user_option != 3
                                         puts "It seems that you don't have enough money"
 
                                     end
-                                    
+
+                                    buy_product_option = 0
+
                                 when buy_product_option = 2
                                     puts "\n"
                                     puts "You've decided to buy cigarretes. "
@@ -527,6 +538,8 @@ while user_option != 3
                                         puts "It seems that you don't have enough money"
 
                                     end
+
+                                    buy_product_option = 0
 
                                 when buy_product_option = 3
                                     puts "\n"
@@ -594,6 +607,8 @@ while user_option != 3
 
                                     end
 
+                                    buy_product_option = 0
+
                                 when buy_product_option = 4
                                     puts "\n"
                                     puts "You've decided to leave. "
@@ -605,6 +620,8 @@ while user_option != 3
                                     puts "\n"
                             end
                         end
+
+                        buyer_option = 0
                         
                     when buyer_option = 3
                         puts "\n"
@@ -615,7 +632,6 @@ while user_option != 3
                     else
                         puts "\n"
                         puts "You've introduced a wrong parameter."
-                        buyer_option = 0
                         puts "\n"
 
                 end
@@ -647,11 +663,11 @@ while user_option != 3
 
             if response
                 puts "\n"
+                owner_option = 0
 
 # Step 44. Owner's actions.
                 
                 while owner_option != 6
-                    owner_option = 0
                     puts "What do you want to do sir? "
                     puts "\n"
                     puts "(1) Add objects to the store."
@@ -670,8 +686,8 @@ while user_option != 3
 # Step 46-1. Add Objects to the store.
 
                         when owner_option = 1
-
                             product_option = 0
+
                             while product_option != 4
                                 puts "\n"
                                 puts "You've decided to add a objects to the store."
@@ -710,7 +726,7 @@ while user_option != 3
                                         type_computer = ""
                                         price_computer = ""
                                         quantity_computer = 0
-
+                                        product_option = 0
 
                                     when product_option = 2
                                         puts "\n"
@@ -735,6 +751,7 @@ while user_option != 3
                                         type_cigarrete = ""
                                         price_cigarrete = ""
                                         quantity_cigarrete = 0  
+                                        product_option = 0
 
                                     when product_option = 3
                                         puts "\n"
@@ -759,6 +776,7 @@ while user_option != 3
                                         type_fruit = ""
                                         price_fruit = ""
                                         quantity_fruit = 0
+                                        product_option = 0
 
                                     when product_option = 4
                                         puts "\n"
@@ -772,6 +790,8 @@ while user_option != 3
                                 end
                             end
 
+                            owner_option = 0
+
 # Step 46-2. Add another user.
 
                         when owner_option = 2
@@ -784,6 +804,8 @@ while user_option != 3
 
                             create_user = Owners.new(new_user_name, new_user_password)
                             owners.push(create_user)
+                            
+                            owner_option = 0
 
 # Step 46-3. Delete a user.
 
@@ -827,6 +849,7 @@ while user_option != 3
 
                             delete_user = 0
                             delete_option = 0
+                            owner_option = 0
 
 # Step 46-4. See users in platform.
 
@@ -840,12 +863,16 @@ while user_option != 3
                                 puts "USER: #{owners[i].name}, PASSWORD: #{owners[i].password}"
                             end
 
+                            owner_option = 0
+
 # Step 46-6. Leave.
 
                         when owner_option = 5
                             puts "\n"
                             puts "You've decided to see all the buyer's information."
                             seeBuyersInfo(buyers_stock)
+
+                            owner_option = 0
 
 # Step 46-6. Leave.
 
@@ -859,7 +886,6 @@ while user_option != 3
                             puts "You've introduce a different value."
                             puts "Please, try again."
                     end 
-                    puts "\n"
                 end
 
 # Step 49. If Owner's parameters are NOK?.
@@ -867,6 +893,8 @@ while user_option != 3
             elsif response == false
                 puts "\n"
             end
+
+            user_option = 0
 
 # Step 50. Leave option.
 
@@ -878,7 +906,6 @@ while user_option != 3
 
         else
             puts "You've chosen a wrong option. Please, try again."
-            user_option = 0
             puts "\n"
     end
 end
