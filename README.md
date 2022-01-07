@@ -7,10 +7,13 @@
 - +52 (444) 576 3034.
 
 ## Description: 
-        In this project we buy or sell books. There are
-        different opitions where you can access and define
-        what do you wish to do. You can add books to the
-        book store's database and buy too.
+        In this project you will be able to buy or sell
+        products. In this supermarket store, you will find
+        products related to electronics and food. Besides, 
+        if you are a supermarket owner, you can create 
+        and add others owners to the system, add products 
+        to the store, store buyer's information in the 
+        supermarket database and more.
         
         Take a look to this project. All the information
         and files are in this repository.
