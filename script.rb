@@ -287,6 +287,7 @@ puts "Hello! This is the George's supermarket where you can find anything here."
 # Step 10. User's choice.
 
 while user_option != 3
+    user_option = 0
     puts "Before to get started, please, tell me, Are you a buyer or a supermarket's owner? " 
     puts "\n"
     puts "(1) Buyer." 
@@ -296,6 +297,7 @@ while user_option != 3
     print "R: "
     user_option = Integer(gets.chomp)
     puts "\n"
+    puts user_option
 
 # Step 20. Case's options.
 
@@ -308,6 +310,7 @@ while user_option != 3
 
 # Step 31. Buyer's choice.
 
+            buyer_option = 0
             while buyer_option != 3
             puts "\n"
             puts "Hello dear user. What do you want to do: "
@@ -323,6 +326,7 @@ while user_option != 3
                     when buyer_option = 1
                         puts "\n"
                         puts "You've decided to see available products."
+                        option_available = 0
 
                         while option_available != 4
                             puts "\n"
@@ -341,17 +345,14 @@ while user_option != 3
                                 when option_available = 1
                                     puts "\n"
                                     seeComputersAvailable(computers_stock)
-                                    option_available = 0
 
                                 when option_available = 2
                                     puts "\n"
                                     seeCigarretesAvailable(cigarretes_stock)
-                                    option_available = 0
 
                                 when option_available = 3
                                     puts "\n"
                                     seeFruitsAvailable(fruits_stock)
-                                    option_available = 0
 
                                 when option_available = 4
                                     puts "\n"
@@ -361,15 +362,13 @@ while user_option != 3
                                     puts "\n"
                                     puts "You've introduce awrong parameter. Please, try again."
                                     puts "\n"
-                                    option_available = 0
                             end
                         end
-                        
-                        buyer_option = 0
-
+    
                     when buyer_option = 2
                         puts "\n"
                         puts "You've decided to buy products."
+                        buy_product_option = 0
 
                         while buy_product_option != 4
                             puts "\n"
@@ -425,28 +424,27 @@ while user_option != 3
                                         puts "(2). No."
                                         puts "\n"
                                         print "R: "
-                                        buyer_purchase = Integer(gets.chomps)
+                                        buyer_purchase = Integer(gets.chomp)
 
                                         if buyer_purchase == 1
                                             puts "\n"
                                             puts "Thanks for the purchase!"
                                             puts "Now, one of our assistants will contact you to review some details. "
-                                            puts "\n"
                                             puts "PURCHASE: COMPUTER: #{computers_stock[buyer_choose_product].type}, PRICE: #{computers_stock[buyer_choose_product].price}, QUANTITY: #{computers_stock[buyer_choose_product].quantity}"
                                             buyer_money = buyer_money - computers_stock[buyer_choose_product].price
                                             computers_stock.delete_at(buyer_choose_product)
                                             puts "\n"                                            
 
-                                        elsif buyer_purchase == 2
+                                            elsif buyer_purchase == 2
                                             puts "\n"
                                             puts "Well, it's ok. You can look for other products."
 
-                                        else
+                                            else
                                             puts "\n"
                                             puts "You typed a different option. Please try again later."                                            
                                         end
 
-                                    else
+                                        else
                                         puts "\n"
                                         puts "It seems that you don't have enough money"
 
@@ -458,7 +456,6 @@ while user_option != 3
 
 
 
-                                    buy_product_option = 0
 
                                 when buy_product_option = 2
                                     puts "\n"
@@ -493,7 +490,6 @@ while user_option != 3
 
 
 
-                                    buy_product_option = 0
 
                                 when buy_product_option = 3
                                     puts "\n"
@@ -525,7 +521,6 @@ while user_option != 3
 
 
 
-                                    buy_product_option = 0
 
                                 when buy_product_option = 4
                                     puts "\n"
@@ -535,13 +530,9 @@ while user_option != 3
                                 else
                                     puts "\n"
                                     puts "You've introduced a wrong parameter."
-                                    buy_product_option = 0
                                     puts "\n"
                             end
                         end
-
-                        buy_product_option = 0
-                        buyer_option = 0
                         
                     when buyer_option = 3
                         puts "\n"
@@ -557,6 +548,8 @@ while user_option != 3
 
                 end
             end
+            user_option = 0
+
 
 # Step 40. Owners' option.
 
@@ -644,7 +637,9 @@ while user_option != 3
                                         type_computer = ""
                                         price_computer = ""
                                         quantity_computer = 0
+                                        user_option = 0
                                         product_option = 4
+
 
                                     when product_option = 2
                                         puts "\n"
@@ -669,6 +664,7 @@ while user_option != 3
                                         type_cigarrete = ""
                                         price_cigarrete = ""
                                         quantity_cigarrete = 0  
+                                        user_option = 0
                                         product_option = 4
 
                                     when product_option = 3
@@ -694,12 +690,14 @@ while user_option != 3
                                         type_fruit = ""
                                         price_fruit = ""
                                         quantity_fruit = 0
+                                        user_option = 0
                                         product_option = 4
 
                                     when product_option = 4
                                         puts "\n"
                                         puts "You've decided to leave."
                                         puts "\n"
+                                        user_option = 0
 
                                     else
                                         puts "\n"
